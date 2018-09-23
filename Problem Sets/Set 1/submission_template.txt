@@ -94,7 +94,17 @@
     </answer>
     <answer number="2b">
         <!-- Paste your solution to problem 2, part (b) below this line. --><![CDATA[
-
+		SELECT COUNT(*)
+		FROM  (SELECT S.WeekDate, AVG(S.WeeklySales) AS A
+			FROM Sales S, Holidays H
+			WHERE S.WeekDate = H.WeekDate
+			AND H.IsHoliday = "FALSE"
+			GROUP BY S.WeekDate) AS wds, 
+			(SELECT AVG(S.WeeklySales) AvgSales
+			FROM Sales S, Holidays H
+			WHERE S.WeekDate = H.WeekDate
+			AND H.IsHoliday = "TRUE") AS hs
+		WHERE wds.A > hs.AvgSales
 
         ]]><!-- End problem 2, part (b). -->
     </answer>
