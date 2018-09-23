@@ -76,7 +76,19 @@
     <!-- BEGIN PROBLEM 2 -->
     <answer number="2a">
         <!-- Paste your solution to problem 2, part (a) below this line. --><![CDATA[
-
+		WITH A AS (SELECT S.Store, SUM(S.WeeklySales) AllSales
+			FROM Sales S, Holidays H
+			WHERE S.WeekDate = H.WeekDate
+			AND H.IsHoliday = "TRUE"
+			GROUP BY S.Store)
+		SELECT A.Store AS Store, A.AllSales
+		FROM A
+		WHERE A.AllSales = (
+			SELECT MAX(A.AllSales)
+			FROM A)
+		OR A.AllSales = (
+			SELECT MIN(A.AllSales)
+			FROM A)
 
         ]]><!-- End problem 2, part (a). -->
     </answer>
