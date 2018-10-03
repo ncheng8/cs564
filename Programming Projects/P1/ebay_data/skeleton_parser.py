@@ -93,6 +93,7 @@ def main(argv):
         print >> sys.stderr, 'Usage: python skeleton_json_parser.py <path to json files>'
         sys.exit(1)
     # loops over all .json files in the argument
+	print "potato"
     for f in argv[1:]:
         if isJson(f):
             parseJson(f)
