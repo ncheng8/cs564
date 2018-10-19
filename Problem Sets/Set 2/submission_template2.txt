@@ -20,14 +20,16 @@
     <student>
         <name>
             <!-- Insert your full name on the line below. -->
+			Nicholas Cheng
             
         </name>
         <netid>
             <!-- Insert your NetID (NOT your student ID number!) below. -->
-
+			ncheng8
         </netid>
         <studentid>
             <!-- Insert your student ID number below. -->
+			9073019797
         </studentid>
     </student>
 
@@ -35,14 +37,34 @@
     <!-- BEGIN PROBLEM 1 -->
     <answer number="1a">
         <!-- Paste your solution to problem 1, part (a) below this line. --><![CDATA[
-
+		SELECT h.provider, COUNT(DISTINCT h.hospital) c1, COUNT(DISTINCT h.address) c2, COUNT(DISTINCT h.city) c3, COUNT(DISTINCT h.state) c4, 
+		COUNT(DISTINCT h.zip) c5, COUNT(DISTINCT h.county) c6, COUNT(DISTINCT h.phone_number) c7, COUNT(DISTINCT h.hospital_type) c8, 
+		COUNT(DISTINCT h.hospital_owner) c9, COUNT(DISTINCT h.emergency_service) c10, COUNT(DISTINCT h.condition) c11, COUNT(DISTINCT h.measure_code) c12
+		FROM hospital h
+		GROUP BY h.provider
+		HAVING c1 > 1
+		OR c2 > 1
+		OR c3 > 1
+		OR c4 > 1
+		OR c5 > 1
+		OR c6 > 1
+		OR c7 > 1
+		OR c8 > 1
+		OR c9 > 1
+		OR c10 > 1
+		OR c11 > 1
+		OR c12 > 1
 
 
         ]]><!-- End problem 1, part (a). -->
     </answer>
     <answer number="1b">
         <!-- Paste your solution to problem 1, part (b) below this line. --><![CDATA[
-
+		SELECT h.zip, COUNT(DISTINCT h.city) CityCount, COUNT(DISTINCT h.state) StateCount
+		FROM hospital h
+		GROUP BY h.zip
+		HAVING CityCount > 1 
+		OR StateCount > 1
 
 
         ]]><!-- End problem 1, part (b). -->
@@ -53,35 +75,40 @@
     <!-- BEGIN PROBLEM 2 -->
     <answer number="2a">
         <!-- Paste your solution to problem 2, part (a) below this line. --><![CDATA[
-
+		answer = True
+		explanation = "the closure of {A,B} is {A,B,C,D,E,F}"
 
 
         ]]><!-- End problem 2, part (a). -->
     </answer>
     <answer number="2b">
         <!-- Paste your solution to problem 2, part (b) below this line. --><![CDATA[
-
+		answer = False
+		explanation = "ABC and EFA can be joined into ABCEF since the intersect A is a superkey in ABC. However, the intersect of ABCEF and CDE is CE, neither of which imply anything. Thus, CE is not a superkey in either relation and the decomposition is not a lossless join"
 
 
         ]]><!-- End problem 2, part (b). -->
     </answer>    
     <answer number="2c">
         <!-- Paste your solution to problem 2, part (c) below this line. --><![CDATA[
-
+		answer = True
+		explanation = "ABC and EFA enforces A -> D,E, CDE enforces D -> E,F. Since all the FD's of S are found in the decomposition, it is dependency preserving"
 
 
         ]]><!-- End problem 2, part (c). -->
     </answer>
     <answer number="2d">
         <!-- Paste your solution to problem 2, part (d) below this line. --><![CDATA[
-
+		answer = True
+		explanation = "By Armstrong's Axiom of Transitivity, since A -> D and D -> C and D -> F, A -> C and F"
 
 
         ]]><!-- End problem 2, part (d). -->
     </answer>
     <answer number="2e">
         <!-- Paste your solution to problem 2, part (e) below this line. --><![CDATA[
-
+		answer = False
+		explanation = "A on the left side of two FD's, and it is in fact a superkey in S. However, D is also on the left side of two FD's, and it is not a superkey. Thus, S is not in BCNF"
 
 
         ]]><!-- End problem 2, part (e). -->
@@ -91,13 +118,14 @@
     <!-- BEGIN PROBLEM 3 -->
     <answer number="3a">
         <!-- Paste your solution to problem 3, part (a) below this line. --><![CDATA[
-
+		$$(\pi_{name}(\pi_{articleID}(JournalArticle)\Join Author) - \pi_{name}(\pi_{articleID}(ConferenceArticle)\Join Author)) \cap (\pi_{name}(\sigma_{affiliation="UW-Madison"}(Person))$$	
 
 
         ]]><!-- End problem 3, part (a). -->
     </answer>
     <answer number="3b">
         <!-- Paste your solution to problem 3, part (b) below this line. --><![CDATA[
+	    $$\pi_{name}(\sigma_{name \neq "John Doe"}(Author) \Join (\pi_{articleID}(\sigma_{name="John Doe"}(Author) \Join (\pi_{articleID}(JournalArticle) \cup \pi_{articleID}(ConferenceArticle)))))$$
 
 
 
@@ -105,7 +133,7 @@
     </answer>
     <answer number="3c">
         <!-- Paste your solution to problem 3, part (c) below this line. --><![CDATA[
-
+		$$\gamma_{COUNT(articleID)}(\sigma_{name="John Doe"} \Join ((\pi_{articleID}(\sigma_{year="2018"}(JournalArticle))) \cup (\pi_{articleID}(\sigma_{year="2018"}(ConferenceArticle)))))$$
 
 
         ]]><!-- End problem 3, part (c). -->
